@@ -4,9 +4,9 @@ spring:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
       connection-init-sqls: set names utf8mb4;
-      url: jdbc:mysql://47.106.169.138:3306/jijl?useUnicode=true&useSSL=false
-      username: root
-      password: jijl
+      url:
+      username:
+      password:
       initial-size: 5
       min-idle: 5
       max-active: 20

@@ -43,9 +43,9 @@ public class CodeGenerator {
         dsc.setDbType(DbType.MYSQL);
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("jijl");
-        dsc.setUrl("jdbc:mysql://47.106.169.138:3306/jijl?useUnicode=true&useSSL=false");
+        dsc.setUsername(" ");
+        dsc.setPassword(" ");
+        dsc.setUrl(" ");
         dsc.setTypeConvert(new MySqlTypeConvert() {
 
             // 自定义数据库表字段类型转换【可选】
