@@ -35,7 +35,7 @@ public class SysLogController {
     @GetMapping("/test")
     public ResultView get(String id) {
         SysLog sysLog = iSysLogService.getById(id);
-        log.info("测试{}", sysLog);
+        int a =10/0;
         return ResultView.ok(sysLog);
     }
 }
