@@ -18,6 +18,7 @@
         <java.version>11</java.version>
         <mybatis-spring-boot-starter>2.1.0</mybatis-spring-boot-starter>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
+        <p6spy.version>3.8.6</p6spy.version>
         <mybatisplus.version>3.2.0</mybatisplus.version>
         <com.alibaba.druid>1.1.20</com.alibaba.druid>
     </properties>
@@ -68,6 +69,12 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis-plus.version}</version>
+        </dependency>
+        <!--执行 SQL 分析打印 支持MyBatis-Plus3.1.0 以上版本-->
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>${p6spy.version}</version>
         </dependency>
         <!--        配置druid-->
         <dependency>

@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        logId, logType, username, operation, method, params, controller, url, ip, time, errorMessage, ctime
+        logid, logtype, username, operation, method, params, controller, url, ip, time, errormessage, ctime
     </sql>
 
 </mapper>
