@@ -4,7 +4,7 @@ import cn.jijl.mist.common.result.ResultEnum;
 import lombok.Getter;
 
 /**
- * @Author: liujiebang
+ * @Author: jijl
  * @Description: 自定义异常类
  * @Date: 2018/7/2 16:48
  **/
