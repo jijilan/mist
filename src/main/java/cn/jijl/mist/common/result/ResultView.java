@@ -5,10 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 /**
  * @Author jijl
- * @Description: restFul自定义响应类
- * @Date 11:47 2019/10/27
- * @Param 
- * @return 
+ * @Description: RrestFul自定义响应类
+ * @Date 14:30 2019/10/27
+ * @Param
+ * @return
  **/
 @Data
 public class ResultView implements Serializable {

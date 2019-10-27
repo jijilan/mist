@@ -1,6 +1,5 @@
 package cn.jijl.mist.common.result;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 
 /**
