@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * @Author: jijl
  * @Description: 自定义参数枚举
- * @Date: 2018/7/2 16:54
+ * @Date: 2019/7/2 16:54
  **/
 @Getter
 public enum ResultEnum {
