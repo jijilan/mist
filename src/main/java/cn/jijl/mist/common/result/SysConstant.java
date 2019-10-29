@@ -10,7 +10,9 @@ package cn.jijl.mist.common.result;
 public class SysConstant {
 
     public static final String PROJECT_NAME = "JIJL_";
-
+    public static final String MANAGER = "manager";
+    public static final String MANAGER_ID = "managerId";
+    public static final String TOKEN = "Authorization";
 
     public static class Redis {
         public final static String MESSAGE1 = "jijl_message1";
