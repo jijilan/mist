@@ -54,3 +54,10 @@ logging:
   level:
     com.springboot.dlc: debug
   path: ./logs/
+
+
+# 拦截器资源规则URL
+interceptor:
+  admin-authentication:
+    addPathPatterns: /*/**
+    excludePathPatterns: /sys-manager/login

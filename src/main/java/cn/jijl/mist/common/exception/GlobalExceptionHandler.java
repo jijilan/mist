@@ -110,6 +110,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     @ResponseBody
     public ResultView httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
+        log.error("捕获异常 = {}", e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_405);
         return resultView;
     }
@@ -123,6 +124,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     @ResponseBody
     public ResultView httpMediaTypeNotAcceptabledExceptionHandler(HttpMediaTypeNotAcceptableException e) {
+        log.error("捕获异常 = {}", e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_406);
         return resultView;
     }
@@ -159,6 +161,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultView defaultErrorHandler(Exception e) {
+        log.error("捕获异常 = {}", e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_500);
         return resultView;
     }

@@ -16,15 +16,43 @@
 
     <properties>
         <java.version>11</java.version>
+        <jaxb>2.3.0</jaxb>
+        <javax.activation>1.1.1</javax.activation>
         <mybatis-spring-boot-starter>2.1.0</mybatis-spring-boot-starter>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <p6spy.version>3.8.6</p6spy.version>
         <mybatisplus.version>3.2.0</mybatisplus.version>
         <com.alibaba.druid>1.1.20</com.alibaba.druid>
         <spring-boot-starter-data-redis>2.1.6.RELEASE</spring-boot-starter-data-redis>
+        <jjwt.version>0.9.1</jjwt.version>
+        <commons-io.version>2.5</commons-io.version>
+        <fastjson.version>1.2.62</fastjson.version>
     </properties>
 
     <dependencies>
+        <!-- java11手动添加javaee的jar包-->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${jaxb}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>activation</artifactId>
+            <version>${javax.activation}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -109,6 +137,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--jwt-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
 

@@ -9,9 +9,9 @@ import java.util.concurrent.CountDownLatch;
 /**
  * @Author jijl
  * @Description: 接收消息
- * @Date 16:42 2019/10/28
- * @Param 
- * @return 
+ * @Date 17:04 2019/10/28
+ * @Param
+ * @return
  **/
 @Slf4j
 public class ReceiveMessage{

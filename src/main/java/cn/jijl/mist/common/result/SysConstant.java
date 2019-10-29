@@ -13,6 +13,10 @@ public class SysConstant {
     public static final String MANAGER = "manager";
     public static final String MANAGER_ID = "managerId";
     public static final String TOKEN = "Authorization";
+    /**
+     * 管理员授权过期时间
+     */
+    public static final long ADMIN_AUTH_TIMEOUT = 259200000;
 
     public static class Redis {
         public final static String MESSAGE1 = "jijl_message1";

@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author jijl
@@ -60,6 +60,13 @@ public class SysManager extends Model<SysManager> {
      */
     @TableField("cTime")
     private Date cTime;
+
+    /**
+     * managerType
+     */
+    @TableField("managerType")
+    private Integer managerType;
+
 
 
     @Override

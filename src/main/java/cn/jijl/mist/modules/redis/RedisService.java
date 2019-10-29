@@ -1,6 +1,7 @@
 package cn.jijl.mist.modules.redis;
 
 
+import cn.jijl.mist.common.result.SysConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisConnectionUtils;
@@ -671,5 +672,26 @@ public class RedisService {
         redisTemplate.convertAndSend(channel, message);
     }
 
+    //===============================业务部分=================================
+    /**
+     * 获取授权主体
+     *
+     * @param uniqueId 唯一编号
+     * @return
+     */
+    public Object getAuthorizedSubject(Integer uniqueId) {
+        return get(SysConstant.PROJECT_NAME + uniqueId);
+    }
 
+    /**
+     * 设置授权主体
+     *
+     * @param uniqueId 唯一编号
+     * @param obj      主体
+     * @param time     过期时间
+     * @return
+     */
+    public boolean setAuthorizedSubject(Integer uniqueId, Object obj, long time) {
+        return set(SysConstant.PROJECT_NAME + uniqueId, obj, time);
+    }
 }
