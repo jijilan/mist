@@ -45,6 +45,7 @@ public class SysLog implements Serializable {
     /**
      * 用户id
      */
+    @TableField("userId")
     private Integer userId;
 
     /**
