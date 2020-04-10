@@ -87,7 +87,8 @@ public class JwtUtil {
 
     public static Integer getUniqueId(String token, String unique) {
         final Claims claims = JwtUtil.parseJWT(token, base64Secret);
-        Integer uniqueId = (Integer) claims.get(unique);
+        System.out.println(claims.get(unique));
+        Integer uniqueId = Integer.valueOf(claims.get(unique).toString());
         return uniqueId;
     }
 

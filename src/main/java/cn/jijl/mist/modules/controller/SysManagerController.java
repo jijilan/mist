@@ -1,13 +1,11 @@
 package cn.jijl.mist.modules.controller;
 
 
+import cn.jijl.mist.common.annotation.log.SysLog;
 import cn.jijl.mist.common.result.ResultView;
 import cn.jijl.mist.common.result.SysConstant;
-import cn.jijl.mist.common.utils.JsonUtils;
 import cn.jijl.mist.modules.controller.base.BaseController;
-import cn.jijl.mist.modules.entity.SysLog;
 import cn.jijl.mist.modules.entity.SysManager;
-import cn.jijl.mist.modules.redis.RedisService;
 import cn.jijl.mist.modules.service.ISysManagerService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
@@ -35,6 +33,14 @@ public class SysManagerController extends BaseController {
     @Autowired
     private ISysManagerService iSysManagerService;
 
+    /**
+     * @Author jijl
+     * @Description: 根据id获取用户信息
+     * @Date 10:43 2020/4/10
+     * @Param [id]
+     * @return cn.jijl.mist.common.result.ResultView
+     **/
+    @SysLog(value = "根据id获取用户信息")
     @GetMapping("/getManagerById")
     public ResultView get(String id) {
         SysManager sysManager = iSysManagerService.getById(id);
@@ -48,12 +54,15 @@ public class SysManagerController extends BaseController {
      * @Param [userAccount, userPassword]
      * @return cn.jijl.mist.common.result.ResultView
      **/
+    @SysLog(value = "登录")
     @PostMapping(value = "/login")
-    public ResultView login(String userAccount, String userPassword) {
+    public ResultView login(@NotBlank(message = "用户名不能为空") String userAccount,
+                            @NotBlank(message = "密码不能为空")
+                            @Length(min = 6, max = 20, message = "密码须在长度6-20位之间") String userPassword) {
         ResultView resultView = iSysManagerService.login(userAccount, userPassword);
         if (resultView.getData() != null) {
             SysManager manager = (SysManager) resultView.getData();
-            String token = jwtToken(SysConstant.MANAGER_ID, manager.getManagerId(), manager, SysConstant.ADMIN_AUTH_TIMEOUT);
+            String token = jwtToken(SysConstant.MANAGER_ID, manager.getUserId(), manager, SysConstant.ADMIN_AUTH_TIMEOUT);
             return ResultView.ok(token);
         }
         return resultView;

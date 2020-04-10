@@ -16,8 +16,11 @@ public enum DictionaryEnum {
     ISFLAG_N(2, "无效/禁用"),
 
     IS_DEL_N(1, "未删除"),
-    IS_DEL_Y(2, "已删除");
+    IS_DEL_Y(2, "已删除"),
 
+
+    LOG_SYSTEM(1, "业务日志"),
+    LOG_ERROR(2, "异常日志");
 
     private int code;
 

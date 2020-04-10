@@ -42,10 +42,10 @@ public class CodeGenerator {
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);
         // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername(" ");
-        dsc.setPassword(" ");
-        dsc.setUrl("jdbc:mysql:// . . . :3306/jijl?useUnicode=true&useSSL=false");
+        dsc.setDriverName("com.p6spy.engine.spy.P6SpyDriver");
+        dsc.setUsername("jijl");
+        dsc.setPassword("jijl");
+        dsc.setUrl("jdbc:mysql://47.106.169.138:3306/jijl?useUnicode=true&useSSL=false");
         dsc.setTypeConvert(new MySqlTypeConvert() {
 
             // 自定义数据库表字段类型转换【可选】
@@ -103,7 +103,7 @@ public class CodeGenerator {
         // 写于父类中的公共字段
         strategy.setSuperEntityColumns("id");
 //        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setInclude("sys_manager");
+        strategy.setInclude("sys_log");
         strategy.setControllerMappingHyphenStyle(true);
 //        strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

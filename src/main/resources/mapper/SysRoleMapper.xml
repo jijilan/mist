@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jijl.mist.modules.mapper.SysRoleMapper">
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,  roleName, roleNote, ctime, isFlag
+    </sql>
+
+    <resultMap type="cn.jijl.mist.modules.entity.view.SysRoleview" id="getAllResult">
+        <id property="id" column="id"/>
+        <result property="roleName" column="roleName"/>
+        <result property="roleNote" column="roleNote"/>
+        <result property="ctime" column="ctime"/>
+        <result property="isFlag" column="isFlag"/>
+        <collection property="sysRoleMenus" javaType="List" ofType="cn.jijl.mist.modules.entity.SysRoleMenu">
+            <id property="roleId" column="roleId"/>
+            <result property="menuId" column="menuId"/>
+        </collection>
+    </resultMap>
+    <select id="getAll">
+    SELECT * FROM`sys_role` r LEFT JOIN `sys_role_menu` m ON r.`id` = m.`roleId`
+    </select>
+
+</mapper>

@@ -28,8 +28,8 @@ public class SysManager extends Model<SysManager> {
     /**
      * 管理员编号
      */
-    @TableId(value = "managerId", type = IdType.AUTO)
-    private Integer managerId;
+    @TableId(value = "userId", type = IdType.AUTO)
+    private Integer userId;
 
     /**
      * 用户名称
@@ -71,7 +71,7 @@ public class SysManager extends Model<SysManager> {
 
     @Override
     protected Serializable pkVal() {
-        return this.managerId;
+        return this.userId;
     }
 
 }

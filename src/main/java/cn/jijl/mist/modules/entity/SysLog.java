@@ -1,6 +1,7 @@
 package cn.jijl.mist.modules.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,30 +16,36 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author jijl
- * @since 2019-10-25
+ * @since 2019-06-19
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class SysLog extends Model<SysLog> {
+public class SysLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 日志编号
      */
-    @TableId(value = "logid", type = IdType.AUTO)
-    private Long logid;
+    @TableId(value = "logId", type = IdType.AUTO)
+    private Long logId;
 
     /**
      * 日志类型:1.业务日志 2.异常日志
      */
-    private Integer logtype;
+    @TableField("logType")
+    private Integer logType;
 
     /**
      * 用户名
      */
     private String username;
+
+    /**
+     * 用户id
+     */
+    private Integer userId;
 
     /**
      * 用户操作
@@ -78,17 +85,13 @@ public class SysLog extends Model<SysLog> {
     /**
      * 异常信息
      */
-    private String errormessage;
+    @TableField("errorMessage")
+    private String errorMessage;
 
     /**
      * 创建时间
      */
     private Date ctime;
 
-
-    @Override
-    protected Serializable pkVal() {
-        return this.logid;
-    }
 
 }

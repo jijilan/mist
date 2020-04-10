@@ -3,9 +3,11 @@ package cn.jijl.mist.common.exception;
 
 import cn.jijl.mist.common.result.ResultEnum;
 import cn.jijl.mist.common.result.ResultView;
+import cn.jijl.mist.modules.service.ISysLogService;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Iterator;
@@ -22,13 +27,16 @@ import java.util.Set;
 
 
 /**
- * @Author: liujiebang
+ * @Author: jijl
  * @Description: Controller异常捕获类
  * @Date: 2018/7/2 16:51
  **/
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @Autowired
+    private ISysLogService iSysLogService;
 
     /**
      * 自定义全局异常
@@ -52,10 +60,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = AuthException.class)
     @ResponseBody
     public ResultView authExceptionHandler(AuthException e) {
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(e.getResultEnum(), e.getMessage());
         return resultView;
     }
-
 
     /**
      * 获取bindingResult中的错误信息
@@ -66,6 +74,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BindException.class)
     @ResponseBody
     public ResultView bindExceptionHandler(BindException e) {
+        RecordExceptionLog(e);
         FieldError fieldError = e.getFieldError();
         StringBuilder sb = new StringBuilder();
         String errorMsg = fieldError.getDefaultMessage();
@@ -84,6 +93,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({TypeMismatchException.class})
     @ResponseBody
     public ResultView typeMismatchExceptionHandler(TypeMismatchException e) {
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_400.getCode(), "参数类型不匹配,参数" + e.getPropertyName() + "类型应该为" + e.getRequiredType());
         return resultView;
     }
@@ -97,6 +107,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
     @ResponseBody
     public ResultView missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException e) {
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_400.getCode(), "缺少必要参数,参数名称为" + e.getParameterName());
         return resultView;
     }
@@ -110,7 +121,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     @ResponseBody
     public ResultView httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException e) {
-        log.error("捕获异常 = {}", e);
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_405);
         return resultView;
     }
@@ -124,7 +135,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
     @ResponseBody
     public ResultView httpMediaTypeNotAcceptabledExceptionHandler(HttpMediaTypeNotAcceptableException e) {
-        log.error("捕获异常 = {}", e);
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_406);
         return resultView;
     }
@@ -138,6 +149,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = ConstraintViolationException.class)
     public ResultView constraintViolationExceptionHandler(ConstraintViolationException e) {
+        RecordExceptionLog(e);
         Set<ConstraintViolation<?>> constraintViolations = e.getConstraintViolations();
         Iterator<ConstraintViolation<?>> iterator = constraintViolations.iterator();
         StringBuffer sb = new StringBuffer(ResultEnum.CODE_2.getMsg());
@@ -161,11 +173,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultView defaultErrorHandler(Exception e) {
-        log.error("捕获异常 = {}", e);
+        RecordExceptionLog(e);
         ResultView resultView = ResultView.error(ResultEnum.CODE_500);
         return resultView;
     }
 
+    /**
+     * 记录异常日志
+     *
+     * @param e
+     */
+    private void RecordExceptionLog(Exception e) {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        log.error("---",e);
+        iSysLogService.saveByError(request, e);
+    }
 
 
     /**

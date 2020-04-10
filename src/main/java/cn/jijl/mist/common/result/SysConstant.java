@@ -13,6 +13,7 @@ public class SysConstant {
     public static final String MANAGER = "manager";
     public static final String MANAGER_ID = "managerId";
     public static final String TOKEN = "Authorization";
+    public static final String ADMIN = "admin";
     /**
      * 管理员授权过期时间
      */
