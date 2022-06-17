@@ -26,7 +26,7 @@
         <spring-boot-starter-data-redis>2.1.6.RELEASE</spring-boot-starter-data-redis>
         <jjwt.version>0.9.1</jjwt.version>
         <commons-io.version>2.5</commons-io.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencies>
